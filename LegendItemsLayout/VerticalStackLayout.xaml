@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LegendItemsLayout.VerticalStackLayouts"
+              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:local="clr-namespace:LegendItemsLayout"
+             Title="VerticalStack Alignment">
+
+    <ContentPage.Content>
+        <Grid >
+            <Grid.BindingContext>
+                <local:LineSeriesViewModel/>
+            </Grid.BindingContext>
+
+            <chart:SfCartesianChart x:Name="chart2"  HorizontalOptions="Fill" VerticalOptions="FillAndExpand" >
+                <chart:SfCartesianChart.PaletteBrushes>
+                    <local:ChartColorModel>
+                        <SolidColorBrush >#3068F7</SolidColorBrush>
+                        <SolidColorBrush >#BD34B7</SolidColorBrush>
+                        <SolidColorBrush >#7442DD</SolidColorBrush>
+                        <SolidColorBrush >#352886</SolidColorBrush>
+                        <SolidColorBrush >#1D5B6F</SolidColorBrush>
+                    </local:ChartColorModel>
+                </chart:SfCartesianChart.PaletteBrushes>
+                <chart:SfCartesianChart.Title>
+         <Label  x:Name="titleName" Text="Global Revenue of the Unilever Group"
+                FontSize="16" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap" Padding="0,0,0,5"/>
+     </chart:SfCartesianChart.Title>
+     <chart:SfCartesianChart.XAxes>
+         <chart:CategoryAxis x:Name="xAxis" LabelPlacement="BetweenTicks" IsVisible="true" ShowMajorGridLines="false">
+         </chart:CategoryAxis>
+     </chart:SfCartesianChart.XAxes>
+
+     <chart:SfCartesianChart.YAxes >
+         <chart:NumericalAxis x:Name="yAxis" ShowMajorGridLines="True" ShowMinorGridLines="false" Minimum="0" Maximum="63" Interval="10">
+             <chart:NumericalAxis.LabelStyle>
+                 <chart:ChartAxisLabelStyle LabelFormat="0'B" />
+             </chart:NumericalAxis.LabelStyle>
+         </chart:NumericalAxis>
+     </chart:SfCartesianChart.YAxes>
+
+     <chart:SfCartesianChart.Legend>
+         <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Right" >
+             <chart:ChartLegend.ItemsLayout>
+                    <local:ColumnLayout HeightRequest="{Binding Height,Source={x:Reference chart2}}" />
+                        </chart:ChartLegend.ItemsLayout>
+         </chart:ChartLegend>
+     </chart:SfCartesianChart.Legend>
+
+     <chart:StackingColumnSeries XBindingPath="Name"
+                             YBindingPath="Value"
+                             ItemsSource="{Binding RevenueData}"
+                             EnableAnimation="True"
+                             Label="Personal care"
+                             ShowDataLabels="True"
+                             LegendIcon="SeriesType"/>
+
+     <chart:StackingColumnSeries  XBindingPath="Name"
+                              YBindingPath="High"
+                              ItemsSource="{Binding RevenueData}"
+                              EnableAnimation="True"
+                              Label="Home care"
+                              ShowDataLabels="True"
+                              LegendIcon="SeriesType"/>
+
+     <chart:StackingColumnSeries XBindingPath="Name"
+                             YBindingPath="Low"
+                             ItemsSource="{Binding RevenueData}"
+                             EnableAnimation="True"
+                             Label="Foods and refreshment"
+                             ShowDataLabels="True"
+                             LegendIcon="SeriesType"/>
+ </chart:SfCartesianChart>
+
+        </Grid>
+        
+        
+    </ContentPage.Content>
+
+</ContentPage>

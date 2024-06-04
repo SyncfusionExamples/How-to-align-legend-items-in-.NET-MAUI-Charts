@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LegendItemsLayout.Default"
+              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:local="clr-namespace:LegendItemsLayout"
+             Title="Default Legend">
+   
+        <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.BindingContext>
+                <local:LineSeriesViewModel/>
+            </Grid.BindingContext>
+
+            <chart:SfCartesianChart x:Name="chart2" Grid.Column="0"  HorizontalOptions="Fill" VerticalOptions="FillAndExpand" >
+                <chart:SfCartesianChart.PaletteBrushes>
+                    <local:ChartColorModel>
+                        <SolidColorBrush >#3068F7</SolidColorBrush>
+                        <SolidColorBrush >#BD34B7</SolidColorBrush>
+                        <SolidColorBrush >#7442DD</SolidColorBrush>
+                        <SolidColorBrush >#352886</SolidColorBrush>
+                        <SolidColorBrush >#1D5B6F</SolidColorBrush>
+                    </local:ChartColorModel>
+                </chart:SfCartesianChart.PaletteBrushes>
+                <chart:SfCartesianChart.Title>
+                    <Label  x:Name="titleName" Text="Global Revenue of the Unilever Group"
+               FontSize="16" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Center"
+              LineBreakMode="WordWrap" Padding="0,0,0,5"/>
+                </chart:SfCartesianChart.Title>
+                <chart:SfCartesianChart.XAxes>
+                    <chart:CategoryAxis x:Name="xAxis" LabelPlacement="BetweenTicks" IsVisible="true" ShowMajorGridLines="false">
+                    </chart:CategoryAxis>
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes >
+                    <chart:NumericalAxis x:Name="yAxis" ShowMajorGridLines="True" ShowMinorGridLines="false" Minimum="0" Maximum="63" Interval="10">
+                        <chart:NumericalAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="0'B" />
+                        </chart:NumericalAxis.LabelStyle>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:SfCartesianChart.Legend>
+                    <chart:ChartLegend ToggleSeriesVisibility="True" Placement="Right">
+                    </chart:ChartLegend>
+                </chart:SfCartesianChart.Legend>
+
+                <chart:StackingColumnSeries XBindingPath="Name"
+                            YBindingPath="Value"
+                            ItemsSource="{Binding RevenueData}"
+                            EnableAnimation="True"
+                            Label="Personal care"
+                            ShowDataLabels="True"
+                            LegendIcon="SeriesType"/>
+
+                <chart:StackingColumnSeries  XBindingPath="Name"
+                             YBindingPath="High"
+                             ItemsSource="{Binding RevenueData}"
+                             EnableAnimation="True"
+                             Label="Home care"
+                             ShowDataLabels="True"
+                             LegendIcon="SeriesType"/>
+
+                <chart:StackingColumnSeries XBindingPath="Name"
+                            YBindingPath="Low"
+                            ItemsSource="{Binding RevenueData}"
+                            EnableAnimation="True"
+                            Label="Foods and refreshment"
+                            ShowDataLabels="True"
+                            LegendIcon="SeriesType"/>
+            </chart:SfCartesianChart>
+       
+
+       
+            
+            <!--Wrapping support-->
+            <chart:SfCircularChart x:Name="Chart" Grid.Column="1"  VerticalOptions="FillAndExpand">
+
+
+                <chart:SfCircularChart.Title>
+                    <Label Text="World Economy in 2021"  Margin="0,0,6,10" HorizontalOptions="Fill"
+      HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="16" />
+                </chart:SfCircularChart.Title>
+                <chart:SfCircularChart.Legend>
+                    <chart:ChartLegend Placement="Bottom">
+                        
+                    </chart:ChartLegend>
+                </chart:SfCircularChart.Legend>
+                <chart:SfCircularChart.Series>
+                    <chart:PieSeries ShowDataLabels="False"  EnableTooltip="True"  GroupTo="1" x:Name="pieSeries1" 
+StrokeWidth="1" Stroke="White"
+ItemsSource="{Binding GroupToData}" XBindingPath="Name" YBindingPath="Value"
+                >
+                        <chart:PieSeries.PaletteBrushes>
+                            <local:ChartColorModel  >
+                                <SolidColorBrush>#1D5B6F</SolidColorBrush>
+                                <SolidColorBrush>#8E4AFC</SolidColorBrush>
+                                <SolidColorBrush>#DE7207</SolidColorBrush>
+                                <SolidColorBrush>#96D759</SolidColorBrush>
+                                <SolidColorBrush>#D15007</SolidColorBrush>
+                                <SolidColorBrush>#9730E7</SolidColorBrush>
+                                <SolidColorBrush>#4A9608</SolidColorBrush>
+                                <SolidColorBrush>#4A7BF8</SolidColorBrush>
+                                <SolidColorBrush>#10AD4F</SolidColorBrush>
+                                <SolidColorBrush>#0DAA97</SolidColorBrush>
+                                <SolidColorBrush>#FEC430</SolidColorBrush>
+                                <SolidColorBrush>#DF76D3</SolidColorBrush>
+                            </local:ChartColorModel>
+                        </chart:PieSeries.PaletteBrushes>
+                        <chart:PieSeries.DataLabelSettings>
+                            <chart:CircularDataLabelSettings LabelPlacement="Inner">
+                                <chart:CircularDataLabelSettings.LabelStyle>
+                                    <chart:ChartDataLabelStyle x:Name="label"  LabelFormat="$#.##'T"/>
+                                </chart:CircularDataLabelSettings.LabelStyle>
+                            </chart:CircularDataLabelSettings>
+                        </chart:PieSeries.DataLabelSettings>
+                    </chart:PieSeries>
+                </chart:SfCircularChart.Series>
+            </chart:SfCircularChart>
+        </Grid>
+    
+</ContentPage>
