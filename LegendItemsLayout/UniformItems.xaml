@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LegendItemsLayout.UniformItems"
+               xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:local="clr-namespace:LegendItemsLayout"
+             Title="UniformItems Alignment">
+
+    <ContentPage.Content>
+        <Grid >
+            <Grid.BindingContext>
+                <local:LineSeriesViewModel/>
+            </Grid.BindingContext>
+            <chart:SfCircularChart x:Name="Chart1" VerticalOptions="FillAndExpand">
+                <chart:SfCircularChart.Resources>
+                    <local:StringFormatConverter x:Key="StingConvert" />
+                </chart:SfCircularChart.Resources>
+                <chart:SfCircularChart.Legend>
+                    <local:LegendExt1  Placement="Bottom">
+                        <local:LegendExt1.ItemsLayout>
+
+                            <local:UniformLayouts MaxRows="12" MaxColumns="4"
+WidthRequest="600" FlowDirection="LeftToRight" />
+                        </local:LegendExt1.ItemsLayout>
+                        <local:LegendExt1.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout >
+                                    <Ellipse HeightRequest="12" WidthRequest="12" 
+           Background="{Binding IconBrush}"/>
+                                    <Label Text="{Binding Item.Name}"
+                                                   Margin="2,0,0,0" WidthRequest="100"
+                                                   HorizontalOptions="Start" HorizontalTextAlignment="Start"
+                                                   FontSize="Caption"
+                                                   VerticalOptions="Center"/>
+                                    <Label Text="{Binding Item,Converter={StaticResource StingConvert},
+                                        ConverterParameter={x:Reference doughnutSeries1}}"
+                                                   FontSize="Caption" 
+                                                  Margin="2,0,0,0"
+                                                   HorizontalOptions="Start" HorizontalTextAlignment="Start"
+                                                  />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </local:LegendExt1.ItemTemplate>
+                    </local:LegendExt1>
+                </chart:SfCircularChart.Legend>
+                <chart:SfCircularChart.Title>
+                    <Label Text="The Global Bond Market" Margin="0"  HorizontalTextAlignment="Center" 
+                           VerticalOptions="FillAndExpand" FontSize="16" />
+                </chart:SfCircularChart.Title>
+
+
+                <chart:SfCircularChart.Series>
+                    <chart:DoughnutSeries x:Name="doughnutSeries1" 
+                                      ItemsSource="{Binding GroupToData}" XBindingPath="Name" 
+                                      YBindingPath="Value" EnableAnimation="False" StrokeWidth="1" 
+                                          Stroke="White"
+                                     >
+                        <chart:DoughnutSeries.PaletteBrushes>
+                            <local:ChartColorModel>
+                                <SolidColorBrush>#1D5B6F</SolidColorBrush>
+                                <SolidColorBrush>#8E4AFC</SolidColorBrush>
+                                <SolidColorBrush>#DE7207</SolidColorBrush>
+                                <SolidColorBrush>#96D759</SolidColorBrush>
+                                <SolidColorBrush>#D15007</SolidColorBrush>
+                                <SolidColorBrush>#9730E7</SolidColorBrush>
+                                <SolidColorBrush>#4A9608</SolidColorBrush>
+                                <SolidColorBrush>#4A7BF8</SolidColorBrush>
+                                <SolidColorBrush>#10AD4F</SolidColorBrush>
+                                <SolidColorBrush>#0DAA97</SolidColorBrush>
+                                <SolidColorBrush>#FEC430</SolidColorBrush>
+                                <SolidColorBrush>#DF76D3</SolidColorBrush>
+                            </local:ChartColorModel>
+                        </chart:DoughnutSeries.PaletteBrushes>
+
+                    </chart:DoughnutSeries>
+                </chart:SfCircularChart.Series>
+            </chart:SfCircularChart>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
